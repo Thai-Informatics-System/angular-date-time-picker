@@ -1,0 +1,33 @@
+{
+  "name": "@servicemind.tis/angular-date-time-picker",
+  "version": "1.0.0",
+  "description": "Lightweight Angular library providing date-time-picker, date-picker, and time-picker components.",
+  "keywords": [
+    "angular",
+    "date-picker",
+    "time-picker",
+    "date-time-picker",
+    "angular-material"
+  ],
+  "author": "Thai Informatics System",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thai-Informatics-System/angular-date-time-picker.git"
+  },
+  "homepage": "https://github.com/Thai-Informatics-System/angular-date-time-picker#readme",
+  "bugs": {
+    "url": "https://github.com/Thai-Informatics-System/angular-date-time-picker/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
