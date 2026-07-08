@@ -1,0 +1,13 @@
+.lib-w-full { width: 100%; }
+
+.lib-time-picker .mat-icon { color: var(--mat-datepicker-toggle-icon-color, #555) !important; }
+.lib-time-picker .lib-icon-disabled { color: var(--mat-icon-button-disabled-icon-color, #aaa) !important; }
+
+.lib-time-input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 0 !important;
+  cursor: pointer;
+}
+
+.lib-time-input:disabled { cursor: default; }

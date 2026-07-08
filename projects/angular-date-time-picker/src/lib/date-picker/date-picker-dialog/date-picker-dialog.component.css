@@ -1,0 +1,17 @@
+.lib-date-picker-dialog {
+  width: 296px;
+}
+
+.lib-dt-picker-action {
+  border-top: 1px solid rgba(0, 0, 0, .12);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lib-dt-picker-action ::ng-deep button {
+  border-radius: 0 !important;
+}
+
+.lib-dt-picker-action ::ng-deep button .mat-mdc-button-touch-target {
+  height: 36px !important;
+}

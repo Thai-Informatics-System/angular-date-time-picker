@@ -1,1 +1,27 @@
-<p>date-time-picker works!</p>
+@if(isLabelOutside && label && label != ''){
+  <label class="lib-label">
+    {{label}}
+    @if(checkValidation){ <span class="lib-required">*</span> }
+  </label>
+}
+<mat-form-field class="lib-w-full lib-date-time-picker {{classes}}" [appearance]="appearance">
+  @if(!isLabelOutside && label && label != ''){
+    <mat-label>{{label}}</mat-label>
+  }
+  <input matInput type="text" [formControl]="dateCtrl" [placeholder]="getPlaceholder()"
+    [pattern]="getDateTimePattern()" maxlength="16"
+    (keydown)="onKeyDown($event)" (input)="onInput($event)" (paste)="onPaste($event)"
+    (focus)="onFocus($event)" (click)="onFocus($event)" />
+  <button type="button" matIconSuffix mat-icon-button aria-label="Date Time Picker"
+    (click)="dateCtrl.disabled ? null : openPicker($event)" [disabled]="dateCtrl.disabled">
+    <mat-icon [class.lib-icon-disabled]="dateCtrl.disabled">today</mat-icon>
+  </button>
+  @if(hint && hint != ''){ <mat-hint>{{hint}}</mat-hint> }
+  <mat-error>
+    @for(v of validationMessages; track v.type){
+      @if(dateCtrl.hasError(v.type) && (dateCtrl.dirty || dateCtrl.touched) && !dialogOpened){
+        {{v.message}}
+      }
+    }
+  </mat-error>
+</mat-form-field>

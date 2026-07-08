@@ -1,0 +1,41 @@
+@if(data.label){
+  <h1 mat-dialog-title style="margin: 0px;">{{data.label}}</h1>
+}
+<div class="lib-time-picker-dialog">
+  <div class="lib-dt-timer">
+    <div class="lib-dt-timer-box">
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Add a hour" (click)="addHour()" [disabled]="btnConfig.addHourDisable">
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <label class="lib-dt-timer-content">
+        <input maxlength="2" class="lib-dt-timer-input" [formControl]="hoursCtrl">
+        <span class="lib-sr-only">Hour</span>
+      </label>
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Minus a hour" (click)="minusHour()" [disabled]="btnConfig.minusHourDisable">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </div>
+    <div class="lib-dt-timer-box">
+      <div aria-hidden="true" class="lib-dt-timer-divider"></div>
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Add a minute" (click)="addMinute()" [disabled]="btnConfig.addMinuteDisable">
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <label class="lib-dt-timer-content">
+        <input maxlength="2" class="lib-dt-timer-input" [formControl]="minCtrl">
+        <span class="lib-sr-only">Minute</span>
+      </label>
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Minus a minute" (click)="minusMinute()" [disabled]="btnConfig.minusMinuteDisable">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </div>
+    <div class="lib-dt-timer-ampm">
+      <button type="button" class="lib-dt-ampm-btn" (click)="toggleAmPm()">
+        <span class="lib-dt-ampm-label">{{amPmCtrl.value}}</span>
+      </button>
+    </div>
+  </div>
+  <div class="lib-dt-picker-action">
+    <button mat-button (click)="onClose(null)">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabledSubmit">Set</button>
+  </div>
+</div>

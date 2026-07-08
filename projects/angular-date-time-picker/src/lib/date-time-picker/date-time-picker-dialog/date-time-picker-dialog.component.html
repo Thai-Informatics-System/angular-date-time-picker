@@ -1,0 +1,44 @@
+@if(data.label){
+  <h1 mat-dialog-title>{{data.label}}</h1>
+}
+<div class="lib-date-time-picker-dialog">
+  <mat-calendar [minDate]="minDate" [maxDate]="maxDate" [selected]="selectedCtrl.value" (selectedChange)="updateFormDate($event)"></mat-calendar>
+  <div class="lib-dt-timer">
+    <div class="lib-dt-timer-box">
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Add a hour" (click)="addHour()" [disabled]="btnConfig.addHourDisable">
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <label class="lib-dt-timer-content">
+        <input maxlength="2" type="text" pattern="[0-9]{1,2}" class="lib-dt-timer-input" [formControl]="hoursCtrl" aria-label="Hours" placeholder="00">
+        <span class="lib-sr-only">Hour</span>
+      </label>
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Minus a hour" (click)="minusHour()" [disabled]="btnConfig.minusHourDisable">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </div>
+    <div class="lib-dt-timer-box">
+      <div aria-hidden="true" class="lib-dt-timer-divider"></div>
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Add a minute" (click)="addMinute()" [disabled]="btnConfig.addMinuteDisable">
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <label class="lib-dt-timer-content">
+        <input maxlength="2" type="text" pattern="[0-9]{1,2}" class="lib-dt-timer-input" [formControl]="minCtrl" aria-label="Minutes" placeholder="00">
+        <span class="lib-sr-only">Minute</span>
+      </label>
+      <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Minus a minute" (click)="minusMinute()" [disabled]="btnConfig.minusMinuteDisable">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </div>
+    @if(is12HourFormat){
+      <div class="lib-dt-timer-ampm">
+        <button type="button" class="lib-dt-ampm-btn" (click)="toggleAmPm()">
+          <span class="lib-dt-ampm-label">{{amPmCtrl.value}}</span>
+        </button>
+      </div>
+    }
+  </div>
+  <div class="lib-dt-picker-action">
+    <button mat-button (click)="onClose(null)">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabledSubmit">Set</button>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+.lib-w-full { width: 100%; }
+
+.lib-label { display: block; margin-bottom: 4px; font-size: 14px; }
+.lib-required { color: red; }
+
+.lib-date-time-picker .mat-icon { color: var(--mat-datepicker-toggle-icon-color, #555) !important; }
+.lib-date-time-picker .lib-icon-disabled { color: var(--mat-icon-button-disabled-icon-color, #aaa) !important; }
