@@ -2,7 +2,7 @@
   <h1 mat-dialog-title>{{data.label}}</h1>
 }
 <div class="lib-date-picker-dialog">
-  <mat-calendar [minDate]="minDate" [maxDate]="maxDate" [selected]="selected" (selectedChange)="updateFormDate($event)"></mat-calendar>
+  <mat-calendar [startAt]="selected" [minDate]="minDate" [maxDate]="maxDate" [selected]="selected" (selectedChange)="updateFormDate($event)"></mat-calendar>
   <div class="lib-dt-picker-action">
     <button mat-button (click)="onClose(null)">Cancel</button>
     <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabledSubmit">Set</button>

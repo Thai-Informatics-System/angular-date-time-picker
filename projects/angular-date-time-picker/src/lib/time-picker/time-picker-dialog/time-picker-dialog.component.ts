@@ -35,6 +35,8 @@ export class TimePickerDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
+  get is12HourFormat(): boolean { return (this.data?.timeFormat ?? '24') === '12'; }
+
   ngOnInit() {
     const minTime: string | null = this.data?.min ?? null;
     const maxTime: string | null = this.data?.max ?? null;
@@ -55,11 +57,16 @@ export class TimePickerDialogComponent {
       let n = Number(hh);
       if (n > this.inputConfig.maxHour) n = this.inputConfig.maxHour;
       if (n < this.inputConfig.minHour) n = this.inputConfig.minHour;
-      let display: any = n <= 0 ? 12 : n <= 12 ? n : n % 12;
-      if (display < 10) display = `0${display}`;
-      this.hoursCtrl.setValue(display, { emitEvent: false });
+      if (this.is12HourFormat) {
+        let display: any = n <= 0 ? 12 : n <= 12 ? n : n % 12;
+        if (display < 10) display = `0${display}`;
+        this.hoursCtrl.setValue(display, { emitEvent: false });
+        this.amPmCtrl.setValue(n < 12 ? 'AM' : 'PM');
+      } else {
+        const display: any = n < 10 ? `0${n}` : `${n}`;
+        this.hoursCtrl.setValue(display, { emitEvent: false });
+      }
       this.time.hh = n < 10 ? `0${n}` : `${n}`;
-      this.amPmCtrl.setValue(n < 12 ? 'AM' : 'PM');
       this.updateDateTime();
     });
 
@@ -118,27 +125,36 @@ export class TimePickerDialogComponent {
     if (hh < Number(this.minTimeArr[0])) hh = Number(this.minTimeArr[0]);
     if (hh > Number(this.maxTimeArr[0])) hh = Number(this.maxTimeArr[0]);
 
-    let display12: any = hh === 0 ? 12 : hh <= 12 ? hh : hh % 12;
-    if (display12 < 10) display12 = `0${display12}`;
-
     let mm: any = Number(this.time.mm);
     if (mm < Number(this.minTimeArr[1])) mm = Number(this.minTimeArr[1]);
     if (mm > Number(this.maxTimeArr[1])) mm = Number(this.maxTimeArr[1]);
     if (mm < 10) mm = `0${mm}`;
 
-    this.hoursCtrl.setValue(display12, { emitEvent: false });
+    if (this.is12HourFormat) {
+      let display12: any = hh === 0 ? 12 : hh <= 12 ? hh : hh % 12;
+      if (display12 < 10) display12 = `0${display12}`;
+      this.hoursCtrl.setValue(display12, { emitEvent: false });
+      this.amPmCtrl.setValue(hh < 12 ? 'AM' : 'PM');
+    } else {
+      this.hoursCtrl.setValue(hh < 10 ? `0${hh}` : `${hh}`, { emitEvent: false });
+    }
+
     this.minCtrl.setValue(mm, { emitEvent: false });
-    this.amPmCtrl.setValue(hh < 12 ? 'AM' : 'PM');
     this.time.hh = hh < 10 ? `0${hh}` : `${hh}`;
     this.time.mm = mm;
     this.setBtnEnableDisable();
   }
 
   updateDateTime() {
-    const hour12 = Number(this.hoursCtrl.value);
     const min = Number(this.minCtrl.value);
-    const ampm = this.amPmCtrl.value;
-    let hh: any = ampm === 'AM' ? (hour12 === 12 ? 0 : hour12) : (hour12 === 12 ? 12 : hour12 + 12);
+    let hh: any;
+    if (this.is12HourFormat) {
+      const hour12 = Number(this.hoursCtrl.value);
+      const ampm = this.amPmCtrl.value;
+      hh = ampm === 'AM' ? (hour12 === 12 ? 0 : hour12) : (hour12 === 12 ? 12 : hour12 + 12);
+    } else {
+      hh = Number(this.hoursCtrl.value);
+    }
     let mm: any = min;
     if (hh < 10) hh = `0${hh}`;
     if (mm < 10) mm = `0${mm}`;
@@ -163,10 +179,15 @@ export class TimePickerDialogComponent {
   }
 
   get disabledSubmit(): boolean {
-    const hour12 = Number(this.hoursCtrl.value);
     const min = Number(this.minCtrl.value);
-    const ampm = this.amPmCtrl.value;
-    const hh = ampm === 'AM' ? (hour12 === 12 ? 0 : hour12) : (hour12 === 12 ? 12 : hour12 + 12);
+    let hh: number;
+    if (this.is12HourFormat) {
+      const hour12 = Number(this.hoursCtrl.value);
+      const ampm = this.amPmCtrl.value;
+      hh = ampm === 'AM' ? (hour12 === 12 ? 0 : hour12) : (hour12 === 12 ? 12 : hour12 + 12);
+    } else {
+      hh = Number(this.hoursCtrl.value);
+    }
     return hh < Number(this.minTimeArr[0]) || hh > Number(this.maxTimeArr[0]) ||
       min < Number(this.minTimeArr[1]) || min > Number(this.maxTimeArr[1]);
   }

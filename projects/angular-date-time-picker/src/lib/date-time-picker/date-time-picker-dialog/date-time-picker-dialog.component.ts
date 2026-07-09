@@ -1,9 +1,7 @@
-import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, combineLatest, debounceTime, startWith, takeUntil } from 'rxjs';
-import { MatCalendar } from '@angular/material/datepicker';
-
 interface DialogData {
   label?: string;
   min?: Date | number | null;
@@ -27,7 +25,6 @@ interface InputConfig {
   styleUrl: './date-time-picker-dialog.component.css'
 })
 export class DateTimePickerDialogComponent implements OnDestroy {
-  @ViewChild(MatCalendar, { static: false }) calendar!: MatCalendar<Date>;
 
   selectedCtrl = new FormControl();
   selected: Date = new Date();
@@ -95,12 +92,6 @@ export class DateTimePickerDialogComponent implements OnDestroy {
       });
 
     this.setTime();
-  }
-
-  ngAfterViewInit(): void {
-    if (this.calendar && this.selected) {
-      this.calendar._goToDateInView(this.selected, 'month');
-    }
   }
 
   ngOnDestroy(): void {
@@ -243,7 +234,6 @@ export class DateTimePickerDialogComponent implements OnDestroy {
     this.selected = new Date(iso);
     this.selectedCtrl.setValue(this.selected);
     this._lastCalculatedTime = '';
-    this.calendar?.updateTodaysDate();
     this.setBtnEnableDisable();
   }
 

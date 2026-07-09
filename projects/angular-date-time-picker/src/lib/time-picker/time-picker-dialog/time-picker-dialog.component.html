@@ -28,11 +28,13 @@
         <mat-icon>expand_more</mat-icon>
       </button>
     </div>
-    <div class="lib-dt-timer-ampm">
-      <button type="button" class="lib-dt-ampm-btn" (click)="toggleAmPm()">
-        <span class="lib-dt-ampm-label">{{amPmCtrl.value}}</span>
-      </button>
-    </div>
+    @if(is12HourFormat){
+      <div class="lib-dt-timer-ampm">
+        <button type="button" class="lib-dt-ampm-btn" (click)="toggleAmPm()">
+          <span class="lib-dt-ampm-label">{{amPmCtrl.value}}</span>
+        </button>
+      </div>
+    }
   </div>
   <div class="lib-dt-picker-action">
     <button mat-button (click)="onClose(null)">Cancel</button>

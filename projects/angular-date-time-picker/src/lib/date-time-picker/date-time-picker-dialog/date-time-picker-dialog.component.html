@@ -2,7 +2,7 @@
   <h1 mat-dialog-title>{{data.label}}</h1>
 }
 <div class="lib-date-time-picker-dialog">
-  <mat-calendar [minDate]="minDate" [maxDate]="maxDate" [selected]="selectedCtrl.value" (selectedChange)="updateFormDate($event)"></mat-calendar>
+  <mat-calendar [startAt]="selected" [minDate]="minDate" [maxDate]="maxDate" [selected]="selectedCtrl.value" (selectedChange)="updateFormDate($event)"></mat-calendar>
   <div class="lib-dt-timer">
     <div class="lib-dt-timer-box">
       <button mat-icon-button class="lib-dt-arrow-btn" aria-label="Add a hour" (click)="addHour()" [disabled]="btnConfig.addHourDisable">

@@ -1,5 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
-import { MatCalendar } from '@angular/material/datepicker';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -9,7 +8,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrl: './date-picker-dialog.component.css'
 })
 export class DatePickerDialogComponent {
-  @ViewChild(MatCalendar, { static: false }) calendar!: MatCalendar<Date>;
   selected: Date = new Date();
   minDate!: Date | null;
   maxDate!: Date | null;
@@ -30,10 +28,6 @@ export class DatePickerDialogComponent {
     } else if (this.maxDate && this.startOfDay(this.maxDate) < this.startOfDay(this.selected)) {
       this.disabledSubmit = true;
     }
-  }
-
-  ngAfterViewInit() {
-    this.calendar._goToDateInView(this.selected, 'month');
   }
 
   updateFormDate(value: Date) {

@@ -131,7 +131,7 @@ export class TimePickerComponent {
   get displayPlaceholder(): string {
     if (this.placeholder) return this.placeholder;
     if (this.timeFormat === '12') return '00:00 --';
-    return this.label ?? '';
+    return 'HH:MM';
   }
 
   setDateValue(time: string) {
@@ -162,6 +162,7 @@ export class TimePickerComponent {
         time: this.timeStr,
         min: this.min,
         max: this.max,
+        timeFormat: this.timeFormat,
       },
       panelClass: ['lib-time-picker-dialog']
     });

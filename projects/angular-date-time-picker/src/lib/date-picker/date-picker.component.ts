@@ -278,6 +278,9 @@ export class DatePickerComponent {
     event.stopPropagation();
     event.preventDefault();
     if (this.disable) return;
+    // Sync parse in case debounce hasn't fired yet
+    const typedDate = this.parseDate(this.dateCtrl.value || '');
+    if (typedDate) this.date = typedDate;
     this.dialogOpened = true;
     const ref = this.dialog.open(DatePickerDialogComponent, {
       data: {

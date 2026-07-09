@@ -125,8 +125,6 @@ export class DateTimePickerComponent {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear().toString().padStart(4, '0');
-    const hh = date.getHours().toString().padStart(2, '0');
-    const mm = date.getMinutes().toString().padStart(2, '0');
     const fmt = this.dateFormate || 'DD/MM/YYYY';
     let datePart = `${day}/${month}/${year}`;
     if (fmt === 'MM/DD/YYYY') datePart = `${month}/${day}/${year}`;
@@ -134,11 +132,40 @@ export class DateTimePickerComponent {
     else if (fmt === 'YYYY-MM-DD') datePart = `${year}-${month}-${day}`;
     else if (fmt === 'DD-MM-YYYY') datePart = `${day}-${month}-${year}`;
     else if (fmt === 'MM-DD-YYYY') datePart = `${month}-${day}-${year}`;
+
+    if (this.timeFormat === '12') {
+      const h24 = date.getHours();
+      const period = h24 < 12 ? 'AM' : 'PM';
+      const h12 = (h24 % 12 || 12).toString().padStart(2, '0');
+      const mm = date.getMinutes().toString().padStart(2, '0');
+      return `${datePart} ${h12}:${mm} ${period}`;
+    }
+    const hh = date.getHours().toString().padStart(2, '0');
+    const mm = date.getMinutes().toString().padStart(2, '0');
     return `${datePart} ${hh}:${mm}`;
   }
 
   public parseDateTime(str: string): Date | null {
     if (!str) return null;
+
+    if (this.timeFormat === '12') {
+      // Expected: "DD/MM/YYYY HH:MM AM" or "DD/MM/YYYY HH:MM PM"
+      const parts = str.trim().split(' ');
+      if (parts.length !== 3) return null;
+      const d = this.parseDate(parts[0]);
+      if (!d) return null;
+      const m = parts[1].match(/^(\d{1,2}):(\d{2})$/);
+      if (!m) return null;
+      const ampm = parts[2].toUpperCase();
+      if (ampm !== 'AM' && ampm !== 'PM') return null;
+      let h = parseInt(m[1], 10);
+      const min = parseInt(m[2], 10);
+      if (h < 1 || h > 12 || min < 0 || min > 59) return null;
+      h = ampm === 'AM' ? (h === 12 ? 0 : h) : (h === 12 ? 12 : h + 12);
+      d.setHours(h, min, 0, 0);
+      return d;
+    }
+
     const parts = str.split(' ');
     if (parts.length !== 2) return null;
     const d = this.parseDate(parts[0]);
@@ -178,23 +205,46 @@ export class DateTimePickerComponent {
       'MM-DD-YYYY': '(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])-[0-9]{4}',
       'YYYY-MM-DD': '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])',
     };
-    return `^${patterns[fmt] || patterns['DD/MM/YYYY']} (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$`;
+    const datePat = patterns[fmt] || patterns['DD/MM/YYYY'];
+    const timePat = this.timeFormat === '12'
+      ? '(0[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)'
+      : '(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])';
+    return `^${datePat} ${timePat}$`;
   }
 
-  getPlaceholder(): string { return `${this.dateFormate || 'DD/MM/YYYY'} HH:MM`; }
+  getPlaceholder(): string {
+    const fmt = this.dateFormate || 'DD/MM/YYYY';
+    return this.timeFormat === '12' ? `${fmt} HH:MM AM/PM` : `${fmt} HH:MM`;
+  }
 
   onKeyDown(event: KeyboardEvent): void {
     const allowed = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter'];
     if (allowed.includes(event.key)) return;
     if (event.ctrlKey && ['a', 'c', 'v', 'x'].includes(event.key.toLowerCase())) return;
-    const isNum = /[0-9]/.test(event.key);
-    if (!isNum && event.key !== ':' && event.key !== ' ') { event.preventDefault(); return; }
-    if (!isNum) return;
 
     const input = event.target as HTMLInputElement;
     const fmt = this.dateFormate || 'DD/MM/YYYY';
     const delim = fmt.includes('/') ? '/' : '-';
     const digits = input.value.replace(/[^0-9]/g, '');
+    const isNum = /[0-9]/.test(event.key);
+
+    // In 12h mode: once 12 digits are entered, handle A/P → AM/PM
+    if (this.timeFormat === '12' && digits.length >= 12) {
+      const key = event.key.toUpperCase();
+      if (key === 'A' || key === 'P') {
+        event.preventDefault();
+        const base = input.value.replace(/\s*(AM|PM)$/i, '');
+        const v = `${base} ${key === 'A' ? 'AM' : 'PM'}`;
+        this.dateCtrl.setValue(v);
+        setTimeout(() => input.setSelectionRange(v.length, v.length), 0);
+        return;
+      }
+      if (!isNum) { event.preventDefault(); return; }
+    }
+
+    if (!isNum && event.key !== ':' && event.key !== ' ') { event.preventDefault(); return; }
+    if (!isNum) return;
+
     if (digits.length >= 12) { event.preventDefault(); return; }
     const next = digits.length + 1;
 
@@ -217,7 +267,9 @@ export class DateTimePickerComponent {
     const input = event.target as HTMLInputElement;
     const fmt = this.dateFormate || 'DD/MM/YYYY';
     const delim = fmt.includes('/') ? '/' : '-';
-    const clean = input.value.replace(new RegExp(`[^0-9${delim === '/' ? '/' : '-'} :]`, 'g'), '');
+    // In 12h mode also allow A, M, P letters (for AM/PM suffix)
+    const extraChars = this.timeFormat === '12' ? 'AaMmPp' : '';
+    const clean = input.value.replace(new RegExp(`[^0-9${delim === '/' ? '/' : '-'} :${extraChars}]`, 'g'), '');
     if (clean.replace(/[^0-9]/g, '').length > 12) return;
     if (clean !== input.value) {
       this.dateCtrl.setValue(clean, { emitEvent: false });
@@ -250,6 +302,9 @@ export class DateTimePickerComponent {
     event.stopPropagation();
     event.preventDefault();
     if (this.disable) return;
+    // Sync parse in case debounce hasn't fired yet
+    const typedDate = this.parseDateTime(this.dateCtrl.value || '');
+    if (typedDate) this.date = typedDate;
     this.dialogOpened = true;
     const ref = this.dialog.open(DateTimePickerDialogComponent, {
       data: {
