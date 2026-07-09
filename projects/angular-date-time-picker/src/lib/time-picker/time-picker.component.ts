@@ -7,7 +7,7 @@ import { ValidationMessages } from '../models/validation-messages.model';
 import { TimePickerDialogComponent } from './time-picker-dialog/time-picker-dialog.component';
 
 @Component({
-  selector: 'lib-time-picker',
+  selector: 'time-picker',
   standalone: false,
   templateUrl: './time-picker.component.html',
   styleUrl: './time-picker.component.css',

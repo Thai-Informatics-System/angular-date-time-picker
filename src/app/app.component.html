@@ -6,19 +6,19 @@
 
     <div class="bg-white rounded-xl shadow p-6 space-y-4">
       <h2 class="text-xl font-semibold text-gray-700">Date Time Picker</h2>
-      <lib-date-time-picker [timeFormat]="timeFormat" [formControl]="dateTimeFc"></lib-date-time-picker>
+      <date-time-picker [timeFormat]="timeFormat" [formControl]="dateTimeFc"></date-time-picker>
       <p>Value: {{ dateTimeFc.value }}</p>
     </div>
 
     <div class="bg-white rounded-xl shadow p-6 space-y-4">
       <h2 class="text-xl font-semibold text-gray-700">Date Picker</h2>
-      <lib-date-picker [formControl]="dateFc"></lib-date-picker>
+      <date-picker [formControl]="dateFc"></date-picker>
       <p>Value: {{ dateFc.value }}</p>
     </div>
 
     <div class="bg-white rounded-xl shadow p-6 space-y-4">
       <h2 class="text-xl font-semibold text-gray-700">Time Picker</h2>
-      <lib-time-picker [timeFormat]="timeFormat" [formControl]="timeFc"></lib-time-picker>
+      <time-picker [timeFormat]="timeFormat" [formControl]="timeFc"></time-picker>
       <p>Value: {{ timeFc.value }}</p>
     </div>
   </div>

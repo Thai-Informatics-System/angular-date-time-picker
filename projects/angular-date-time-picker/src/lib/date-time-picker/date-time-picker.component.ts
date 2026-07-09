@@ -7,7 +7,7 @@ import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { ValidationMessages } from '../models/validation-messages.model';
 
 @Component({
-  selector: 'lib-date-time-picker',
+  selector: 'date-time-picker',
   standalone: false,
   templateUrl: './date-time-picker.component.html',
   styleUrl: './date-time-picker.component.css',
