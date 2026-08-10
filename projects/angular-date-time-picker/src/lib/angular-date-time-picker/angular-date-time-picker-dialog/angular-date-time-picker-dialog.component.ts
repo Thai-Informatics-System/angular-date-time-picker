@@ -19,12 +19,12 @@ interface InputConfig {
 }
 
 @Component({
-  selector: 'lib-date-time-picker-dialog',
+  selector: 'angular-date-time-picker-dialog',
   standalone: false,
-  templateUrl: './date-time-picker-dialog.component.html',
-  styleUrl: './date-time-picker-dialog.component.css'
+  templateUrl: './angular-date-time-picker-dialog.component.html',
+  styleUrl: './angular-date-time-picker-dialog.component.css'
 })
-export class DateTimePickerDialogComponent implements OnDestroy {
+export class AngularDateTimePickerDialogComponent implements OnDestroy {
 
   selectedCtrl = new FormControl();
   selected: Date = new Date();
@@ -46,7 +46,7 @@ export class DateTimePickerDialogComponent implements OnDestroy {
   btnConfig = { addHourDisable: false, minusHourDisable: false, addMinuteDisable: false, minusMinuteDisable: false };
 
   constructor(
-    public dialogRef: MatDialogRef<DateTimePickerDialogComponent>,
+    public dialogRef: MatDialogRef<AngularDateTimePickerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
   ) {
     this.data = { ...dialogData };

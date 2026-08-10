@@ -4,12 +4,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'lib-time-picker-dialog',
+  selector: 'angular-time-picker-dialog',
   standalone: false,
-  templateUrl: './time-picker-dialog.component.html',
-  styleUrl: './time-picker-dialog.component.css'
+  templateUrl: './angular-time-picker-dialog.component.html',
+  styleUrl: './angular-time-picker-dialog.component.css'
 })
-export class TimePickerDialogComponent {
+export class AngularTimePickerDialogComponent {
   hoursCtrl = new FormControl();
   minCtrl = new FormControl();
   amPmCtrl = new FormControl();
@@ -31,7 +31,7 @@ export class TimePickerDialogComponent {
   };
 
   constructor(
-    public dialogRef: MatDialogRef<TimePickerDialogComponent>,
+    public dialogRef: MatDialogRef<AngularTimePickerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 

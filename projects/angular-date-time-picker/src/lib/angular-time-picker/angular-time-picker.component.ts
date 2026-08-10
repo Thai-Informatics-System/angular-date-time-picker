@@ -4,20 +4,20 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { ValidationMessages } from '../models/validation-messages.model';
-import { TimePickerDialogComponent } from './time-picker-dialog/time-picker-dialog.component';
+import { AngularTimePickerDialogComponent } from './angular-time-picker-dialog/angular-time-picker-dialog.component';
 
 @Component({
-  selector: 'time-picker',
+  selector: 'angular-time-picker',
   standalone: false,
-  templateUrl: './time-picker.component.html',
-  styleUrl: './time-picker.component.css',
+  templateUrl: './angular-time-picker.component.html',
+  styleUrl: './angular-time-picker.component.css',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TimePickerComponent),
+    useExisting: forwardRef(() => AngularTimePickerComponent),
     multi: true
   }]
 })
-export class TimePickerComponent {
+export class AngularTimePickerComponent {
   timeCtrl = new FormControl('');
   minTime: string = '00:00';
   maxTime: string = '23:59';
@@ -156,7 +156,7 @@ export class TimePickerComponent {
     event.preventDefault();
     if (this.disable) return;
     this.dialogOpened = true;
-    const ref = this.dialog.open(TimePickerDialogComponent, {
+    const ref = this.dialog.open(AngularTimePickerDialogComponent, {
       data: {
         label: this.isDisplayPickerLabel && this.label ? this.label : null,
         time: this.timeStr,

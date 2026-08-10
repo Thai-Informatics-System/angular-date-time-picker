@@ -9,21 +9,21 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
-import { DatePickerComponent } from './date-picker/date-picker.component';
-import { DatePickerDialogComponent } from './date-picker/date-picker-dialog/date-picker-dialog.component';
-import { TimePickerComponent } from './time-picker/time-picker.component';
-import { TimePickerDialogComponent } from './time-picker/time-picker-dialog/time-picker-dialog.component';
-import { DateTimePickerComponent } from './date-time-picker/date-time-picker.component';
-import { DateTimePickerDialogComponent } from './date-time-picker/date-time-picker-dialog/date-time-picker-dialog.component';
+import { AngularDatePickerComponent } from './angular-date-picker/angular-date-picker.component';
+import { AngularDatePickerDialogComponent } from './angular-date-picker/angular-date-picker-dialog/angular-date-picker-dialog.component';
+import { AngularTimePickerComponent } from './angular-time-picker/angular-time-picker.component';
+import { AngularTimePickerDialogComponent } from './angular-time-picker/angular-time-picker-dialog/angular-time-picker-dialog.component';
+import { AngularDateTimePickerComponent } from './angular-date-time-picker/angular-date-time-picker.component';
+import { AngularDateTimePickerDialogComponent } from './angular-date-time-picker/angular-date-time-picker-dialog/angular-date-time-picker-dialog.component';
 
 @NgModule({
   declarations: [
-    DatePickerComponent,
-    DatePickerDialogComponent,
-    TimePickerComponent,
-    TimePickerDialogComponent,
-    DateTimePickerComponent,
-    DateTimePickerDialogComponent,
+    AngularDatePickerComponent,
+    AngularDatePickerDialogComponent,
+    AngularTimePickerComponent,
+    AngularTimePickerDialogComponent,
+    AngularDateTimePickerComponent,
+    AngularDateTimePickerDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -37,9 +37,9 @@ import { DateTimePickerDialogComponent } from './date-time-picker/date-time-pick
     MatNativeDateModule,
   ],
   exports: [
-    DatePickerComponent,
-    TimePickerComponent,
-    DateTimePickerComponent,
+    AngularDatePickerComponent,
+    AngularTimePickerComponent,
+    AngularDateTimePickerComponent,
   ]
 })
 export class AngularDateTimePickerModule { }

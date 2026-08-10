@@ -2,22 +2,22 @@ import { Component, EventEmitter, Input, Output, SimpleChanges, forwardRef } fro
 import { FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
-import { DateTimePickerDialogComponent } from './date-time-picker-dialog/date-time-picker-dialog.component';
+import { AngularDateTimePickerDialogComponent } from './angular-date-time-picker-dialog/angular-date-time-picker-dialog.component';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { ValidationMessages } from '../models/validation-messages.model';
 
 @Component({
-  selector: 'date-time-picker',
+  selector: 'angular-date-time-picker',
   standalone: false,
-  templateUrl: './date-time-picker.component.html',
-  styleUrl: './date-time-picker.component.css',
+  templateUrl: './angular-date-time-picker.component.html',
+  styleUrl: './angular-date-time-picker.component.css',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DateTimePickerComponent),
+    useExisting: forwardRef(() => AngularDateTimePickerComponent),
     multi: true
   }]
 })
-export class DateTimePickerComponent {
+export class AngularDateTimePickerComponent {
   dateCtrl = new FormControl('');
   tempDate!: string;
 
@@ -306,7 +306,7 @@ export class DateTimePickerComponent {
     const typedDate = this.parseDateTime(this.dateCtrl.value || '');
     if (typedDate) this.date = typedDate;
     this.dialogOpened = true;
-    const ref = this.dialog.open(DateTimePickerDialogComponent, {
+    const ref = this.dialog.open(AngularDateTimePickerDialogComponent, {
       data: {
         label: this.isDisplayPickerLabel && this.label ? this.label : null,
         date: this.date,

@@ -2,19 +2,19 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'lib-date-picker-dialog',
+  selector: 'angular-date-picker-dialog',
   standalone: false,
-  templateUrl: './date-picker-dialog.component.html',
-  styleUrl: './date-picker-dialog.component.css'
+  templateUrl: './angular-date-picker-dialog.component.html',
+  styleUrl: './angular-date-picker-dialog.component.css'
 })
-export class DatePickerDialogComponent {
+export class AngularDatePickerDialogComponent {
   selected: Date = new Date();
   minDate!: Date | null;
   maxDate!: Date | null;
   disabledSubmit = false;
 
   constructor(
-    public dialogRef: MatDialogRef<DatePickerDialogComponent>,
+    public dialogRef: MatDialogRef<AngularDatePickerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
