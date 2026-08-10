@@ -1,6 +1,6 @@
 {
   "name": "angular-date-time-picker-project",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
