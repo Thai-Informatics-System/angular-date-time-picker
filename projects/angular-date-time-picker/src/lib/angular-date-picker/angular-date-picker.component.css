@@ -1,8 +1,17 @@
 .lib-w-full { width: 100%; }
 
-.lib-label { display: block; margin-bottom: 4px; font-size: 14px; }
+.lib-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--angular-heading-color, #212121);
+}
 
-.lib-required { color: red; }
+.lib-required { color: var(--angular-danger, #bb333b); }
 
-.lib-date-picker .mat-icon { color: var(--mat-datepicker-toggle-icon-color, #555) !important; }
-.lib-date-picker .lib-icon-disabled { color: var(--mat-icon-button-disabled-icon-color, #aaa) !important; }
+.lib-date-picker .mat-icon {
+  color: var(--angular-picker-icon, var(--mat-datepicker-toggle-icon-color, #555)) !important;
+}
+.lib-date-picker .lib-icon-disabled {
+  color: var(--angular-picker-icon-disabled, var(--mat-icon-button-disabled-icon-color, #aaa)) !important;
+}

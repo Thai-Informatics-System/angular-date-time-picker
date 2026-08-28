@@ -221,6 +221,48 @@ Closes with a `Date` (date + time) on confirm, or `null` on cancel.
 
 ---
 
+## Theming
+
+Set these CSS variables on `:root` or `body`. All have fallbacks — unset tokens keep the library defaults.
+
+Shared names match `@servicemind.tis/angular-smart-data-table`, so one `:root` block themes both libraries.
+
+```css
+:root {
+  --angular-primary: #3838a2;
+  --angular-on-primary: #ffffff;
+  --angular-danger: #bb333b;
+  --angular-heading-color: #212121;
+  --angular-text-body: rgba(0, 0, 0, 0.87);
+  --angular-surface: #ffffff;
+  --angular-divider: rgba(0, 0, 0, 0.12);
+  --angular-picker-dialog-width: 296px;
+  --angular-picker-input-border: rgba(0, 0, 0, 0.5);
+  --angular-picker-input-radius: 3px;
+  --angular-picker-icon: #555;
+  --angular-picker-icon-disabled: #aaa;
+}
+```
+
+| Variable | Default | Used for |
+|---|---|---|
+| `--angular-primary` | `#3838a2` | Selected day, AM/PM, Cancel/Set |
+| `--angular-on-primary` | `#ffffff` | Text on selected day and AM/PM hover |
+| `--angular-danger` | `#bb333b` | Required asterisk |
+| `--angular-heading-color` | `#212121` | Outside field label |
+| `--angular-text-body` | `rgba(0, 0, 0, 0.87)` | Dialog and time-input text |
+| `--angular-surface` | `#ffffff` | Time-input background |
+| `--angular-divider` | `rgba(0, 0, 0, 0.12)` | Dialog section borders |
+| `--angular-picker-dialog-width` | `296px` | Dialog width |
+| `--angular-picker-input-border` | `rgba(0, 0, 0, 0.5)` | Hour/minute input border |
+| `--angular-picker-input-radius` | `3px` | Hour/minute and AM/PM radius |
+| `--angular-picker-icon` | `#555` | Field suffix icon |
+| `--angular-picker-icon-disabled` | `#aaa` | Disabled suffix icon |
+
+If `--angular-primary` is unset, the picker falls back to `--mat-sys-primary`, then `#3838a2`.
+
+---
+
 ## License
 
 MIT © Thai Informatics System Co., Ltd.

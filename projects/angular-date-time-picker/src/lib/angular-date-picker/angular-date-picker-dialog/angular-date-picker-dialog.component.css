@@ -1,9 +1,20 @@
 .lib-date-picker-dialog {
-  width: 296px;
+  --_accent: var(--angular-primary, var(--mat-sys-primary, #3838a2));
+  --_on-accent: var(--angular-on-primary, #ffffff);
+  width: var(--angular-picker-dialog-width, 296px);
+  color: var(--angular-text-body, rgba(0, 0, 0, 0.87));
+  --mat-datepicker-calendar-date-selected-state-background-color: var(--_accent);
+  --mat-datepicker-calendar-date-selected-state-text-color: var(--_on-accent);
+  --mat-datepicker-calendar-date-today-outline-color: var(--_accent);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--_on-accent);
+  --mat-datepicker-calendar-navigation-enabled-icon-color: var(--_accent);
+  --mat-datepicker-calendar-period-button-icon-color: var(--_accent);
+  --mdc-text-button-label-text-color: var(--_accent);
+  --mat-button-text-label-text-color: var(--_accent);
 }
 
 .lib-dt-picker-action {
-  border-top: 1px solid rgba(0, 0, 0, .12);
+  border-top: 1px solid var(--angular-divider, rgba(0, 0, 0, .12));
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
