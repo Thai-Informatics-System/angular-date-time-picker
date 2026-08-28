@@ -1,6 +1,6 @@
 {
   "name": "@servicemind.tis/angular-date-time-picker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Angular Material date, time, and combined date-time picker components with dialog-based selection, 12/24-hour support, and configurable validation messages.",
   "keywords": [
     "angular",
