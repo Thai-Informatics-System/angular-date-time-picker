@@ -45,6 +45,13 @@ export class AngularDatePickerDialogComponent {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
   }
 
+  onDateDoubleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.mat-calendar-body-cell:not(.mat-calendar-body-disabled)')) return;
+    if (this.disabledSubmit) return;
+    this.onSubmit();
+  }
+
   onSubmit() {
     this.onClose(this.selected);
   }

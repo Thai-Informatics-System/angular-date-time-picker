@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4202",
     "build": "ng build",
     "build-library": "ng build angular-date-time-picker --configuration=production",
     "build-library-watch": "ng build angular-date-time-picker --configuration=production --watch",

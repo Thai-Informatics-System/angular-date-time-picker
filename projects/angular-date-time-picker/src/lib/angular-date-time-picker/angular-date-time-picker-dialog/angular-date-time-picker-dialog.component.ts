@@ -272,6 +272,12 @@ export class AngularDateTimePickerDialogComponent implements OnDestroy {
     return h12 === 12 ? 12 : h12 + 12;
   }
 
+  onDateDoubleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.mat-calendar-body-cell:not(.mat-calendar-body-disabled)')) return;
+    this.onSubmit();
+  }
+
   onSubmit() {
     this.updateDateTime();
     this.updateSubmitValidation();
