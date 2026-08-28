@@ -38,8 +38,11 @@ import { AngularDateTimePickerDialogComponent } from './angular-date-time-picker
   ],
   exports: [
     AngularDatePickerComponent,
+    AngularDatePickerDialogComponent,
     AngularTimePickerComponent,
+    AngularTimePickerDialogComponent,
     AngularDateTimePickerComponent,
+    AngularDateTimePickerDialogComponent,
   ]
 })
 export class AngularDateTimePickerModule { }

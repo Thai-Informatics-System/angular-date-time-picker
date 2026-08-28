@@ -10,11 +10,14 @@ Angular Material date, time, and combined date-time picker components by **Thai 
 
 ## Components
 
-| Selector | Component | Emits |
+| Selector | Component | Emits / closes with |
 |---|---|---|
 | `<angular-date-picker>` | `AngularDatePickerComponent` | `dateChange: Date` |
 | `<angular-time-picker>` | `AngularTimePickerComponent` | `timeChange: string` |
 | `<angular-date-time-picker>` | `AngularDateTimePickerComponent` | `dateChange: Date` |
+| — | `AngularDatePickerDialogComponent` | `Date \| null` |
+| — | `AngularTimePickerDialogComponent` | `string \| null` (`HH:mm` 24h) |
+| — | `AngularDateTimePickerDialogComponent` | `Date \| null` |
 
 ---
 
@@ -114,6 +117,107 @@ messages: ValidationMessages[] = [
 ```html
 <angular-date-picker [validationMessages]="messages" [formControl]="startDate"></angular-date-picker>
 ```
+
+---
+
+## Using the dialogs directly
+
+The form-field pickers above wrap these dialogs. Open them yourself with `MatDialog` when you want a picker without the input — from a button, a table cell, or a custom field.
+
+Import `AngularDateTimePickerModule` (the dialogs are declared there) and inject `MatDialog`.
+
+Confirm with **Set**, or double-click a calendar day on the date / date-time dialogs. **Cancel** closes with `null`.
+
+### Date picker dialog
+
+```ts
+import { MatDialog } from '@angular/material/dialog';
+import { AngularDatePickerDialogComponent } from '@servicemind.tis/angular-date-time-picker';
+
+constructor(private dialog: MatDialog) {}
+
+openDatePicker() {
+  this.dialog.open(AngularDatePickerDialogComponent, {
+    data: {
+      label: 'Start date',  // optional dialog title
+      date: new Date(),     // initial selection
+      min: this.minDate,    // Date | null
+      max: this.maxDate,    // Date | null
+    },
+    panelClass: ['lib-date-picker-dialog'],
+  }).afterClosed().subscribe((date: Date | null) => {
+    if (date) this.startDate = date;
+  });
+}
+```
+
+| `data` | Type | Description |
+|---|---|---|
+| `label` | `string \| null` | Optional title |
+| `date` | `Date \| null` | Initial selected date |
+| `min` / `max` | `Date \| null` | Allowed range |
+
+Closes with a `Date` on confirm, or `null` on cancel.
+
+### Time picker dialog
+
+```ts
+import { AngularTimePickerDialogComponent } from '@servicemind.tis/angular-date-time-picker';
+
+openTimePicker() {
+  this.dialog.open(AngularTimePickerDialogComponent, {
+    data: {
+      label: 'Start time',
+      time: '09:30',        // initial time, 24h "HH:mm"
+      min: '08:00',
+      max: '18:00',
+      timeFormat: '12',     // '12' | '24'
+    },
+    panelClass: ['lib-time-picker-dialog'],
+  }).afterClosed().subscribe((time: string | null) => {
+    if (time) this.startTime = time; // always "HH:mm" 24h, e.g. "09:30"
+  });
+}
+```
+
+| `data` | Type | Description |
+|---|---|---|
+| `label` | `string \| null` | Optional title |
+| `time` | `string \| null` | Initial time as `HH:mm` (24h) |
+| `min` / `max` | `string \| null` | Allowed range as `HH:mm` |
+| `timeFormat` | `'12' \| '24'` | Display format (default `'24'`) |
+
+Closes with `"HH:mm"` (24h) on confirm, or `null` on cancel.
+
+### Date-time picker dialog
+
+```ts
+import { AngularDateTimePickerDialogComponent } from '@servicemind.tis/angular-date-time-picker';
+
+openDateTimePicker() {
+  this.dialog.open(AngularDateTimePickerDialogComponent, {
+    data: {
+      label: 'Appointment',
+      date: new Date(),
+      min: this.minDate,
+      max: this.maxDate,
+      timeFormat: '12',
+    },
+    panelClass: ['lib-date-time-picker-dialog'],
+  }).afterClosed().subscribe((date: Date | null) => {
+    if (date) this.appointment = date;
+  });
+}
+```
+
+| `data` | Type | Description |
+|---|---|---|
+| `label` | `string` | Optional title |
+| `date` | `Date \| number \| null` | Initial date-time |
+| `min` / `max` | `Date \| number \| null` | Allowed range |
+| `timeFormat` | `'12' \| '24'` | Time display format (default `'24'`) |
+
+Closes with a `Date` (date + time) on confirm, or `null` on cancel.
 
 ---
 
