@@ -9,6 +9,7 @@
   --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--_on-accent);
   --mat-datepicker-calendar-navigation-enabled-icon-color: var(--_accent);
   --mat-datepicker-calendar-period-button-icon-color: var(--_accent);
+  --mat-datepicker-calendar-period-button-text-color: var(--_accent);
   --mdc-text-button-label-text-color: var(--_accent);
   --mat-button-text-label-text-color: var(--_accent);
 }
@@ -25,4 +26,14 @@
 
 .lib-dt-picker-action ::ng-deep button .mat-mdc-button-touch-target {
   height: 36px !important;
+}
+
+.lib-dt-btn-cancel {
+  --mdc-text-button-label-text-color: var(--angular-danger, #bb333b);
+  --mat-button-text-label-text-color: var(--angular-danger, #bb333b);
+}
+
+.lib-dt-btn-set {
+  --mdc-text-button-label-text-color: var(--_accent, var(--angular-primary, #3838a2));
+  --mat-button-text-label-text-color: var(--_accent, var(--angular-primary, #3838a2));
 }

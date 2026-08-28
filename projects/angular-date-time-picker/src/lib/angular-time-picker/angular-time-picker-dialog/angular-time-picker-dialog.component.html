@@ -37,7 +37,7 @@
     }
   </div>
   <div class="lib-dt-picker-action">
-    <button mat-button (click)="onClose(null)">Cancel</button>
-    <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabledSubmit">Set</button>
+    <button mat-button class="lib-dt-btn-cancel" (click)="onClose(null)">Cancel</button>
+    <button mat-button class="lib-dt-btn-set" cdkFocusInitial (click)="onSubmit()" [disabled]="disabledSubmit">Set</button>
   </div>
 </div>

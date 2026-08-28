@@ -223,7 +223,9 @@ Closes with a `Date` (date + time) on confirm, or `null` on cancel.
 
 ## Theming
 
-Set these CSS variables on `:root` or `body`. All have fallbacks — unset tokens keep the library defaults.
+Set these CSS variables on `:root` or `body` in a **global** stylesheet (e.g. `styles.scss`). A component `.scss` file will not reach the picker dialog — it is attached to `body` by `MatDialog`.
+
+All have fallbacks — unset tokens keep the library defaults.
 
 Shared names match `@servicemind.tis/angular-smart-data-table`, so one `:root` block themes both libraries.
 
@@ -246,9 +248,9 @@ Shared names match `@servicemind.tis/angular-smart-data-table`, so one `:root` b
 
 | Variable | Default | Used for |
 |---|---|---|
-| `--angular-primary` | `#3838a2` | Selected day, AM/PM, Cancel/Set |
+| `--angular-primary` | `#3838a2` | Selected day, AM/PM, Set |
 | `--angular-on-primary` | `#ffffff` | Text on selected day and AM/PM hover |
-| `--angular-danger` | `#bb333b` | Required asterisk |
+| `--angular-danger` | `#bb333b` | Required asterisk, Cancel |
 | `--angular-heading-color` | `#212121` | Outside field label |
 | `--angular-text-body` | `rgba(0, 0, 0, 0.87)` | Dialog and time-input text |
 | `--angular-surface` | `#ffffff` | Time-input background |

@@ -105,6 +105,16 @@
 .lib-dt-picker-action ::ng-deep button { border-radius: 0 !important; }
 .lib-dt-picker-action ::ng-deep button .mat-mdc-button-touch-target { height: 36px !important; }
 
+.lib-dt-btn-cancel {
+  --mdc-text-button-label-text-color: var(--angular-danger, #bb333b);
+  --mat-button-text-label-text-color: var(--angular-danger, #bb333b);
+}
+
+.lib-dt-btn-set {
+  --mdc-text-button-label-text-color: var(--_accent, var(--angular-primary, #3838a2));
+  --mat-button-text-label-text-color: var(--_accent, var(--angular-primary, #3838a2));
+}
+
 .lib-sr-only {
   border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px;
   overflow: hidden; padding: 0; position: absolute; width: 1px;
