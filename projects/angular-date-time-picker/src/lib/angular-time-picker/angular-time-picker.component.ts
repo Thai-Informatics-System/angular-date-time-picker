@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, forwardRef } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, inject, EventEmitter, Input, Output, SimpleChanges, forwardRef } from '@angular/core';
 import { AbstractControl, FormControl, NG_VALUE_ACCESSOR, ValidatorFn, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { ValidationMessages } from '../models/validation-messages.model';
 import { AngularTimePickerDialogComponent } from './angular-time-picker-dialog/angular-time-picker-dialog.component';
+import { syncTouchedState } from '../utils/sync-touched-state';
 
 @Component({
   selector: 'angular-time-picker',
@@ -43,6 +44,8 @@ export class AngularTimePickerComponent {
   dialogOpened = false;
 
   private _onDestroy = new Subject<void>();
+  private injector = inject(Injector);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   constructor(public dialog: MatDialog) {}
 
@@ -95,6 +98,10 @@ export class AngularTimePickerComponent {
       this.maxTime = this.max || '23:59';
       this.timeCtrl.setValidators([timeRangeValidator(this.minTime, this.maxTime)]);
     }
+  }
+
+  ngAfterContentInit() {
+    syncTouchedState(this.injector, this.timeCtrl, this.changeDetectorRef, this._onDestroy);
   }
 
   ngOnDestroy() {

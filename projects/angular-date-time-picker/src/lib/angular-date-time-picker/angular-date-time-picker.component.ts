@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, forwardRef } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, inject, EventEmitter, Input, Output, SimpleChanges, forwardRef } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularDateTimePickerDialogComponent } from './angular-date-time-picker-dialog/angular-date-time-picker-dialog.component';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { ValidationMessages } from '../models/validation-messages.model';
+import { syncTouchedState } from '../utils/sync-touched-state';
 
 @Component({
   selector: 'angular-date-time-picker',
@@ -43,6 +44,8 @@ export class AngularDateTimePickerComponent {
   dialogOpened = false;
 
   private _onDestroy = new Subject<void>();
+  private injector = inject(Injector);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   constructor(public dialog: MatDialog) {}
 
@@ -100,6 +103,10 @@ export class AngularDateTimePickerComponent {
         this.dateCtrl.removeValidators(Validators.required); this.dateCtrl.updateValueAndValidity();
       }
     }
+  }
+
+  ngAfterContentInit() {
+    syncTouchedState(this.injector, this.dateCtrl, this.changeDetectorRef, this._onDestroy);
   }
 
   ngOnDestroy() { this._onDestroy.next(); this._onDestroy.complete(); }
