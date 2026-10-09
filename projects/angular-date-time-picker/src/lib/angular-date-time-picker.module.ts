@@ -15,6 +15,7 @@ import { AngularTimePickerComponent } from './angular-time-picker/angular-time-p
 import { AngularTimePickerDialogComponent } from './angular-time-picker/angular-time-picker-dialog/angular-time-picker-dialog.component';
 import { AngularDateTimePickerComponent } from './angular-date-time-picker/angular-date-time-picker.component';
 import { AngularDateTimePickerDialogComponent } from './angular-date-time-picker/angular-date-time-picker-dialog/angular-date-time-picker-dialog.component';
+import { SoftKeyboardGuardDirective } from './utils/soft-keyboard-guard.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AngularDateTimePickerDialogComponent } from './angular-date-time-picker
     AngularTimePickerDialogComponent,
     AngularDateTimePickerComponent,
     AngularDateTimePickerDialogComponent,
+    SoftKeyboardGuardDirective,
   ],
   imports: [
     CommonModule,

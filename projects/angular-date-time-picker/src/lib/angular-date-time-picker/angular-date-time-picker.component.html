@@ -8,7 +8,7 @@
   @if(!isLabelOutside && label && label != ''){
     <mat-label>{{label}}</mat-label>
   }
-  <input matInput type="text" [formControl]="dateCtrl" [placeholder]="getPlaceholder()"
+  <input matInput libSoftKeyboardGuard type="text" [formControl]="dateCtrl" [placeholder]="getPlaceholder()"
     [pattern]="getDateTimePattern()" [maxlength]="timeFormat === '12' ? 19 : 16"
     (keydown)="onKeyDown($event)" (input)="onInput($event)" (paste)="onPaste($event)"
     (focus)="onFocus($event)" (click)="onFocus($event)" />
