@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
@@ -7,6 +7,7 @@ import { Subject, debounceTime, takeUntil } from 'rxjs';
   selector: 'angular-time-picker-dialog',
   standalone: false,
   templateUrl: './angular-time-picker-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './angular-time-picker-dialog.component.css'
 })
 export class AngularTimePickerDialogComponent {

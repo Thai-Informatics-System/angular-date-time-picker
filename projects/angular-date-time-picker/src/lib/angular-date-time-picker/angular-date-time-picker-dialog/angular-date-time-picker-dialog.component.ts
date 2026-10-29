@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, combineLatest, debounceTime, startWith, takeUntil } from 'rxjs';
@@ -22,6 +22,7 @@ interface InputConfig {
   selector: 'angular-date-time-picker-dialog',
   standalone: false,
   templateUrl: './angular-date-time-picker-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './angular-date-time-picker-dialog.component.css'
 })
 export class AngularDateTimePickerDialogComponent implements OnDestroy {
