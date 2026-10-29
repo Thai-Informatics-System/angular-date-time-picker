@@ -1,6 +1,6 @@
 {
   "name": "@servicemind.tis/angular-date-time-picker",
-  "version": "1.0.11",
+  "version": "2.0.0",
   "description": "Angular Material date, time, and combined date-time picker components with dialog-based selection, 12/24-hour support, and configurable validation messages.",
   "keywords": [
     "angular",
@@ -24,10 +24,11 @@
     "url": "https://github.com/Thai-Informatics-System/angular-date-time-picker/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^19.2.0",
-    "@angular/core": "^19.2.0",
-    "@angular/material": "^19.2.8",
-    "@angular/cdk": "^19.2.8"
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/material": "^22.0.0",
+    "@angular/cdk": "^22.0.0",
+    "@angular/forms": "^22.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

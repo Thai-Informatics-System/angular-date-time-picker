@@ -1,21 +1,20 @@
 .lib-date-picker-dialog {
   --_accent: var(--angular-primary, var(--mat-sys-primary, #3838a2));
-  --_on-accent: var(--angular-on-primary, #ffffff);
+  --_on-accent: var(--angular-on-primary, var(--mat-sys-on-primary, #ffffff));
   width: var(--angular-picker-dialog-width, 296px);
-  color: var(--angular-text-body, rgba(0, 0, 0, 0.87));
+  color: var(--angular-text-body, var(--mat-sys-on-surface, rgba(0, 0, 0, 0.87)));
   --mat-datepicker-calendar-date-selected-state-background-color: var(--_accent);
   --mat-datepicker-calendar-date-selected-state-text-color: var(--_on-accent);
   --mat-datepicker-calendar-date-today-outline-color: var(--_accent);
   --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--_on-accent);
-  --mat-datepicker-calendar-navigation-enabled-icon-color: var(--_accent);
+  --mat-datepicker-calendar-navigation-button-icon-color: var(--_accent);
   --mat-datepicker-calendar-period-button-icon-color: var(--_accent);
   --mat-datepicker-calendar-period-button-text-color: var(--_accent);
-  --mdc-text-button-label-text-color: var(--_accent);
   --mat-button-text-label-text-color: var(--_accent);
 }
 
 .lib-dt-picker-action {
-  border-top: 1px solid var(--angular-divider, rgba(0, 0, 0, .12));
+  border-top: 1px solid var(--angular-divider, var(--mat-sys-outline-variant, rgba(0, 0, 0, .12)));
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -29,11 +28,9 @@
 }
 
 .lib-dt-btn-cancel {
-  --mdc-text-button-label-text-color: var(--angular-danger, #bb333b);
-  --mat-button-text-label-text-color: var(--angular-danger, #bb333b);
+  --mat-button-text-label-text-color: var(--angular-danger, var(--mat-sys-error, #bb333b));
 }
 
 .lib-dt-btn-set {
-  --mdc-text-button-label-text-color: var(--_accent, var(--angular-primary, #3838a2));
-  --mat-button-text-label-text-color: var(--_accent, var(--angular-primary, #3838a2));
+  --mat-button-text-label-text-color: var(--_accent, var(--angular-primary, var(--mat-sys-primary, #3838a2)));
 }

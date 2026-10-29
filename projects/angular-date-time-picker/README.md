@@ -21,6 +21,17 @@ Angular Material date, time, and combined date-time picker components by **Thai 
 
 ---
 
+## Compatibility
+
+| Library | Angular, Material, CDK |
+|---|---|
+| 2.x | 22.x |
+| 1.x | 19.x |
+
+**2.0.0** — built with Angular 22 (partial compilation), so it needs Angular 22 and does not work on older versions; stay on 1.x for Angular 19. `@angular/forms` is now a declared peer. Styles fall back to Material 3 system tokens (`--mat-sys-*`), so the pickers follow an M3 app theme with no extra CSS; the `--angular-*` variables below still override them.
+
+---
+
 ## Installation
 
 ```bash
@@ -30,7 +41,7 @@ npm install @servicemind.tis/angular-date-time-picker
 ### Peer dependencies
 
 ```bash
-npm install @angular/material @angular/cdk
+npm install @angular/material@^22 @angular/cdk@^22
 ```
 
 ---
@@ -246,22 +257,22 @@ Shared names match `@servicemind.tis/angular-smart-data-table`, so one `:root` b
 }
 ```
 
-| Variable | Default | Used for |
-|---|---|---|
-| `--angular-primary` | `#3838a2` | Selected day, AM/PM, Set |
-| `--angular-on-primary` | `#ffffff` | Text on selected day and AM/PM hover |
-| `--angular-danger` | `#bb333b` | Required asterisk, Cancel |
-| `--angular-heading-color` | `#212121` | Outside field label |
-| `--angular-text-body` | `rgba(0, 0, 0, 0.87)` | Dialog and time-input text |
-| `--angular-surface` | `#ffffff` | Time-input background |
-| `--angular-divider` | `rgba(0, 0, 0, 0.12)` | Dialog section borders |
-| `--angular-picker-dialog-width` | `296px` | Dialog width |
-| `--angular-picker-input-border` | `rgba(0, 0, 0, 0.5)` | Hour/minute input border |
-| `--angular-picker-input-radius` | `3px` | Hour/minute and AM/PM radius |
-| `--angular-picker-icon` | `#555` | Field suffix icon |
-| `--angular-picker-icon-disabled` | `#aaa` | Disabled suffix icon |
+| Variable | Material 3 fallback | Default | Used for |
+|---|---|---|---|
+| `--angular-primary` | `--mat-sys-primary` | `#3838a2` | Selected day, AM/PM, Set |
+| `--angular-on-primary` | `--mat-sys-on-primary` | `#ffffff` | Text on selected day and AM/PM hover |
+| `--angular-danger` | `--mat-sys-error` | `#bb333b` | Required asterisk, Cancel |
+| `--angular-heading-color` | `--mat-sys-on-surface` | `#212121` | Outside field label |
+| `--angular-text-body` | `--mat-sys-on-surface` | `rgba(0, 0, 0, 0.87)` | Dialog and time-input text |
+| `--angular-surface` | `--mat-sys-surface` | `#ffffff` | Time-input background |
+| `--angular-divider` | `--mat-sys-outline-variant` | `rgba(0, 0, 0, 0.12)` | Dialog section borders |
+| `--angular-picker-dialog-width` | — | `296px` | Dialog width |
+| `--angular-picker-input-border` | `--mat-sys-outline` | `rgba(0, 0, 0, 0.5)` | Hour/minute input border |
+| `--angular-picker-input-radius` | — | `3px` | Hour/minute and AM/PM radius |
+| `--angular-picker-icon` | `--mat-datepicker-toggle-icon-color` | `#555` | Field suffix icon |
+| `--angular-picker-icon-disabled` | `--mat-icon-button-disabled-icon-color` | `#aaa` | Disabled suffix icon |
 
-If `--angular-primary` is unset, the picker falls back to `--mat-sys-primary`, then `#3838a2`.
+Each colour resolves in order: the `--angular-*` variable if you set it, then the Material token (set by an M3 theme, `mat.theme`), then the default.
 
 ---
 

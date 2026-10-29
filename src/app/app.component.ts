@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AngularDateTimePickerModule } from '../../projects/angular-date-time-picker/src/public-api';
 
@@ -6,6 +6,7 @@ import { AngularDateTimePickerModule } from '../../projects/angular-date-time-pi
   selector: 'app-root',
   imports: [AngularDateTimePickerModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.component.scss'
 })
 export class AppComponent {

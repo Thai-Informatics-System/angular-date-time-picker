@@ -4,10 +4,10 @@
   display: block;
   margin-bottom: 4px;
   font-size: 14px;
-  color: var(--angular-heading-color, #212121);
+  color: var(--angular-heading-color, var(--mat-sys-on-surface, #212121));
 }
 
-.lib-required { color: var(--angular-danger, #bb333b); }
+.lib-required { color: var(--angular-danger, var(--mat-sys-error, #bb333b)); }
 
 .lib-date-time-picker .mat-icon {
   color: var(--angular-picker-icon, var(--mat-datepicker-toggle-icon-color, #555)) !important;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Injector, inject, EventEmitter, Input, Output, SimpleChanges, forwardRef } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, inject, EventEmitter, Input, Output, SimpleChanges, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl, NG_VALUE_ACCESSOR, ValidatorFn, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { syncTouchedState } from '../utils/sync-touched-state';
   standalone: false,
   templateUrl: './angular-time-picker.component.html',
   styleUrl: './angular-time-picker.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => AngularTimePickerComponent),

@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'angular-date-picker-dialog',
   standalone: false,
   templateUrl: './angular-date-picker-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './angular-date-picker-dialog.component.css'
 })
 export class AngularDatePickerDialogComponent {
